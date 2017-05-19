@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Controller
 public class StudentController {
+    private static final int PAGESIZE = 5;
     @Autowired
     private StudentService studentService;
     @Autowired
@@ -29,8 +30,10 @@ public class StudentController {
     private SubjectService subjectService;
 
     @RequestMapping("/studentMain")
-    public String list(Model model) {
-        Page<StudentVO> page = studentService.getOnePage(0, 5);
+    public String list(Model model, int curPage) {
+        Page<StudentVO> page = studentService.getOnePage(curPage - 1, PAGESIZE);
+        model.addAttribute("curPage", curPage);
+        model.addAttribute("totalPage", studentService.getTotalPage(PAGESIZE));
         model.addAttribute("subjectVOList", subjectService.getAllSubject());
         model.addAttribute("studentVOList", page.getContent());
         model.addAttribute("gradeVOList", gradeService.getAllGrade());
@@ -43,13 +46,13 @@ public class StudentController {
         if (!studentService.existsStudent(studentVO.getId())) {
             studentService.saveStudent(studentVO, gradeId, myfiles, request);
         }
-        return "redirect:/studentMain";
+        return "redirect:/studentMain?curPage=1";
     }
 
     @RequestMapping("/deleteStudent")
     public String deleteStudent(Integer id) {
         studentService.deleteStudent(id);
-        return "redirect:/studentMain";
+        return "redirect:/studentMain?curPage=1";
     }
 
     @RequestMapping("/addSubjectAndScoreToStudent")
@@ -69,12 +72,11 @@ public class StudentController {
     @RequestMapping("/updateStudentForm")
     public String updateStudentForm(StudentVO studentVO, Integer gradeId, Integer oldGradeId, @RequestParam MultipartFile[] myfiles, HttpServletRequest request) throws IOException {
         studentService.updateStudent(studentVO, gradeId, oldGradeId, myfiles, request);
-        return "redirect:/studentMain";
+        return "redirect:/studentMain?curPage=1";
     }
 
     @RequestMapping("/goAddSubjectAndScoreForm")
     public String goAddSubjectAndScoreForm(int id, Model model) {
-        System.out.println(studentService.uncheckedSubject(id));
         model.addAttribute("uncheckedSubjectList", studentService.uncheckedSubject(id));
         model.addAttribute("studentId", id);
         return "addSubjectAndScoreForm";

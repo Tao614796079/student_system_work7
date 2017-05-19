@@ -85,7 +85,7 @@ public class SubjectServiceImpl implements SubjectService {
 
         //班级平均分
         GradePO gradePO = studentPO.getGradePO();
-        float gradeAvgScore = (gradePO.getAvgScore() * gradePO.getStudentNumber() +studentAvgScore - studentPO.getAvgScore())/gradePO.getStudentNumber();
+        float gradeAvgScore = (gradePO.getAvgScore() * gradePO.getStudentNumber() + studentAvgScore - studentPO.getAvgScore()) / gradePO.getStudentNumber();
         studentPO.getGradePO().setAvgScore(gradeAvgScore);
 
         //学生平均分修改

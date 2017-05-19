@@ -45,7 +45,7 @@
 
     <!-- ace settings handler -->
     <script src="assets/js/ace-extra.min.js"></script>
-
+    <script src="js/form.js"></script>
     <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
 
     <!--[if lte IE 8]>
@@ -58,7 +58,7 @@
 <div id="navbar" class="navbar navbar-default          ace-save-state">
     <div class="navbar-container ace-save-state" id="navbar-container">
         <div class="navbar-header pull-left">
-            <a href="tables2.html" class="navbar-brand">
+            <a href="${pageContext.request.contextPath}/index.jsp" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
                     Student System
@@ -72,7 +72,7 @@
     <div id="sidebar" class="sidebar                  responsive                    ace-save-state">
         <ul class="nav nav-list">
             <li class="text-center">
-                <a href="${pageContext.request.contextPath}/studentMain">
+                <a href="${pageContext.request.contextPath}/index.jsp">
 							<span class="menu-text">
 								学生
 							</span>
@@ -118,7 +118,8 @@
                                 <br>
                                 <div class="space-6"></div>
                                 <br>
-                                <table id="simple-table" class="table  table-bordered table-hover">
+                                <table id="simple-table" class="table  table-bordered table-hover"
+                                       style="margin: 0px">
                                     <thead>
                                     <tr>
                                         <th>序号</th>
@@ -322,6 +323,75 @@
                                     </c:forEach>
                                     </tbody>
                                 </table>
+                                <div class="message-footer clearfix">
+                                    <!--<div class="pull-left"> 151 messages total</div>-->
+
+                                    <div class="pull-right">
+                                        <div class="inline middle"> 共${totalPage}页</div>
+
+                                        &nbsp; &nbsp;
+                                        <ul class="pagination middle">
+                                            <c:choose>
+                                                <c:when test="${curPage == 1}">
+                                                    <li class="disabled">
+                                                        <span>
+                                                            <i class="ace-icon fa fa-step-backward middle"></i>
+                                                        </span>
+                                                    </li>
+                                                    <li class="disabled">
+                                                        <span>
+                                                            <i class="ace-icon fa fa-caret-left bigger-140 middle"></i>
+                                                        </span>
+                                                    </li>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <li>
+                                                        <a href="${pageContext.request.contextPath}/studentMain?curPage=${1}">
+                                                            <i class="ace-icon fa fa-step-backward middle"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="${pageContext.request.contextPath}/studentMain?curPage=${curPage - 1}">
+                                                            <i class="ace-icon fa fa-caret-left bigger-140 middle"></i>
+                                                        </a>
+                                                    </li>
+                                                </c:otherwise>
+                                            </c:choose>
+                                            <li>
+                                                <span>
+                                                    <input value="${curPage}" id="page-input"
+                                                           maxlength="3" type="text"/>
+                                                </span>
+                                            </li>
+                                            <c:choose>
+                                                <c:when test="${curPage == totalPage}">
+                                                    <li class="disabled">
+                                                        <span>
+                                                            <i class="ace-icon fa fa-caret-right bigger-140 middle"></i>
+                                                        </span>
+                                                    </li>
+                                                    <li class="disabled">
+                                                        <span>
+                                                            <i class="ace-icon fa fa-step-forward middle"></i>
+                                                        </span>
+                                                    </li>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <li>
+                                                        <a href="${pageContext.request.contextPath}/studentMain?curPage=${curPage + 1}">
+                                                            <i class="ace-icon fa fa-caret-right bigger-140 middle"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="${pageContext.request.contextPath}/studentMain?curPage=${totalPage}">
+                                                            <i class="ace-icon fa fa-step-forward middle"></i>
+                                                        </a>
+                                                    </li>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div><!-- /.span -->
                         </div><!-- /.row -->
                         <!-- PAGE CONTENT ENDS -->
@@ -339,7 +409,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="blue bigger">请输入学生信息</h4>
             </div>
-            <form class="form-horizontal" role="form"
+            <form class="form-horizontal" role="form" id="addStudentForm"
                   action="${pageContext.request.contextPath}/addStudent" method="post"
                   enctype="multipart/form-data">
 
@@ -355,9 +425,9 @@
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label no-padding-right"
-                                       for="form-field-1-1"> 学号 </label>
+                                       for="id"> 学号 </label>
                                 <div class="col-sm-9">
-                                    <input type="text" id="form-field-1-1" class="form-control"
+                                    <input type="text" id="id" class="form-control"
                                            name="id"/>
                                 </div>
                             </div>
@@ -365,17 +435,16 @@
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label no-padding-right"
-                                       for="form-field-1-2"> 姓名 </label>
+                                       for="name"> 姓名 </label>
                                 <div class="col-sm-9">
-                                    <input type="text" id="form-field-1-2" class="form-control"
+                                    <input type="text" id="name" class="form-control"
                                            name="name"/>
                                 </div>
                             </div>
                             <div class="space-4"></div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label no-padding-right"
-                                       for="form-field-1-1"> 性别 </label>
+                                <label class="col-sm-2 control-label no-padding-right"> 性别 </label>
                                 <div class="col-sm-9">
                                     <div class="control-group">
                                         <div class="radio">
@@ -398,11 +467,11 @@
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label no-padding-right"
-                                       for="form-field-1">班级 </label>
+                                       for="gradeId">班级 </label>
 
                                 <div class="col-sm-9">
                                     <div>
-                                        <select class="form-control" id="form-field-1"
+                                        <select class="form-control" id="gradeId"
                                                 name="gradeId">
                                             <option value=""></option>
                                             <c:forEach items="${gradeVOList}" var="gradeVO">
@@ -421,7 +490,7 @@
                                     <div class="input-group">
 
                                         <input class="form-control date-picker"
-                                               id="id-date-picker-1" type="text" name="birthday"
+                                               id="birthday" type="text" name="birthday"
                                                data-date-format="yyyy-mm-dd"/>
                                         <span class="input-group-addon">
                                                     <i class="fa fa-calendar bigger-110"></i>
@@ -438,7 +507,7 @@
                         <i class="ace-icon fa fa-undo "></i>
                         重置
                     </button>
-                    <button class="btn btn-sm btn-primary" type="submit">
+                    <button class="btn btn-sm btn-primary" type="button" onclick="addStudent()">
                         <i class="ace-icon fa fa-check"></i>
                         保存
                     </button>
@@ -535,43 +604,13 @@
                 }
             });
         });
-        $(".check-add-input").click(function () {
-            if ($(this).is(':checked')) {
-                $(this).next().next().append("<input type='text' name='score'placeholder='请输入成绩'>")
-            } else {
-                $(this).next().next().empty();
+        $('#page-input').on('keypress', function (event) {
+            if (event.keyCode == 13) {
+                var page = $('#page-input').val();
+                window.location.href = "${pageContext.request.contextPath}/studentMain?curPage="
+                    + page;
             }
         });
-
-        $(".btn-selectSubject").on("click", function () {
-            var stuId = $(this).attr("data-id");
-            $("#studentId").val(stuId);
-        });
-        function submitAddSubject() {
-            var studentId = $("#studentId").val();
-            var subjects = [];
-            var scores = [];
-            $('input[name="subject_id"]:checked').each(function () {
-                subjects.push($(this).val());
-            });
-            $('input[name="score"]:input').each(function () {
-                scores.push($(this).val());
-            });
-            alert("studentId=" + studentId);
-            alert("subjects=" + subjects);
-            alert("scores=" + scores);
-            $.ajax({
-                type: "POST", url: "addSubjectToStudent", traditional: true, data: {
-                    "subjects": JSON.stringify(subjects),
-                    "studentId": studentId,
-                    "scores": JSON.stringify(scores)
-                }, dataType: "json", async: false, success: function (data) {
-                    if (data) {
-                        window.location.reload();
-                    }
-                }
-            });
-        }
 
         $('.show-details-btn').on('click', function (e) {
             e.preventDefault();

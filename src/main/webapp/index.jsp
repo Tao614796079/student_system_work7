@@ -1,5 +1,5 @@
 <html>
 <body>
-<jsp:forward page="/studentMain"/>
+<jsp:forward page="studentMain?curPage=1"/>
 </body>
 </html>

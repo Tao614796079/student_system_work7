@@ -48,7 +48,7 @@ public class StudentPO {
     @ManyToOne(fetch = FetchType.EAGER)
     private GradePO gradePO;
     /**
-     *选修的课程
+     * 选修的课程
      */
     @ManyToMany(fetch = FetchType.EAGER)
     private List<SubjectPO> subjectPOList;

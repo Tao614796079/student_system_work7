@@ -55,7 +55,7 @@ public class StudentServiceImpl implements StudentService {
             } else {
                 //如果用的是Tomcat服务器，则文件会上传到\\%TOMCAT_HOME%\\webapps\\YourWebProject\\WEB-INF\\upload\\img文件夹中
                 String realPath = request.getSession().getServletContext().getRealPath("/upload/img");
-                studentVO.setImageUrl("/upload/img/" + myfile.getOriginalFilename());
+                studentVO.setImageUrl("upload/img/" + myfile.getOriginalFilename());
                 //这里不必处理IO流关闭的问题，因为FileUtils.copyInputStreamToFile()方法内部会自动把用到的IO流关掉
                 FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(realPath, myfile.getOriginalFilename()));
             }
@@ -144,11 +144,18 @@ public class StudentServiceImpl implements StudentService {
             SubjectVO subjectVO = it.next();
             for (SubjectVO subjectVO2 : checkedSubject) {
                 if (subjectVO.getId() == subjectVO2.getId()) {
-                    System.out.println("equals");
                     it.remove();
                 }
             }
         }
         return allSubject;
+    }
+
+    public int getTotalPage(int pageSize) {
+        int totalPage = studentJpaRepository.getCount() / pageSize;
+        if (studentJpaRepository.getCount() % pageSize != 0) {
+            totalPage++;
+        }
+        return totalPage;
     }
 }

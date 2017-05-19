@@ -37,7 +37,7 @@ public class MarkServiceImpl implements MarkService {
             scoreSum += score;
         }
         //学生平均分
-        studentVO.setAvgScore(scoreSum/(scores.length));
+        studentVO.setAvgScore(scoreSum / (scores.length));
         List<MarkPO> markPOList = new ArrayList<MarkPO>();
         MarkVO markVO = new MarkVO();
         for (int i = 0; i < scores.length; i++) {
@@ -45,7 +45,7 @@ public class MarkServiceImpl implements MarkService {
             markVO.setScore(scores[i]);
             markVO.setStudentVO(studentVO);
             //计算科目平均分  选课人数加一
-            float subjectAvgScore = (subjectVO.getAvgScore() * subjectVO.getStudentNumber() + scores[i])/(subjectVO.getStudentNumber()+1);
+            float subjectAvgScore = (subjectVO.getAvgScore() * subjectVO.getStudentNumber() + scores[i]) / (subjectVO.getStudentNumber() + 1);
             subjectVO.setStudentNumber(subjectVO.getStudentNumber() + 1);
             studentVO.setAvgScore(subjectAvgScore);
             markVO.setSubjectVO(subjectVO);

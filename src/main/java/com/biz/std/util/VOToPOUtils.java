@@ -17,7 +17,7 @@ import java.util.List;
  * Created by Administrator on 2017/5/8.
  */
 public class VOToPOUtils {
-    public static StudentPO studentVOToPO (StudentVO studentVO) {
+    public static StudentPO studentVOToPO(StudentVO studentVO) {
         StudentPO studentPO = new StudentPO();
         studentPO.setId(studentVO.getId());
         studentPO.setName(studentVO.getName());
@@ -26,13 +26,13 @@ public class VOToPOUtils {
         studentPO.setAvgScore(studentVO.getAvgScore());
         studentPO.setImageUrl(studentVO.getImageUrl());
         studentPO.setGradePO(VOToPOUtils.gradeVoToPo(studentVO.getGradeVO()));
-        if (studentVO.getSubjectVOList() != null){
+        if (studentVO.getSubjectVOList() != null) {
             studentPO.setSubjectPOList(subjectListVOToPO(studentVO.getSubjectVOList()));
         }
         return studentPO;
     }
 
-    public static GradePO gradeVoToPo (GradeVO gradeVO) {
+    public static GradePO gradeVoToPo(GradeVO gradeVO) {
         GradePO gradePO = new GradePO();
         gradePO.setId(gradeVO.getId());
         gradePO.setName(gradeVO.getName());
@@ -41,7 +41,7 @@ public class VOToPOUtils {
         return gradePO;
     }
 
-    public static SubjectPO subjectVOToPO (SubjectVO subjectVO){
+    public static SubjectPO subjectVOToPO(SubjectVO subjectVO) {
         SubjectPO subjectPO = new SubjectPO();
         subjectPO.setId(subjectVO.getId());
         subjectPO.setName(subjectVO.getName());
@@ -52,7 +52,7 @@ public class VOToPOUtils {
 
     public static List<SubjectPO> subjectListVOToPO(List<SubjectVO> subjectVOList) {
         List<SubjectPO> subjectPOList = new ArrayList<SubjectPO>();
-        for (SubjectVO subjectVO:subjectVOList) {
+        for (SubjectVO subjectVO : subjectVOList) {
             subjectPOList.add(subjectVOToPO(subjectVO));
         }
         return subjectPOList;

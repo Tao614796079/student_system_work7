@@ -14,6 +14,9 @@ import java.util.List;
  * Created by Administrator on 2017/5/6.
  */
 @Repository
-public interface StudentJpaRepository extends JpaRepository<StudentPO, Integer>{
+public interface StudentJpaRepository extends JpaRepository<StudentPO, Integer> {
     List<StudentPO> findAllByGradePO(GradePO gradePO);
+
+    @Query(nativeQuery = true, value = "select count(1) from student")
+    int getCount();
 }

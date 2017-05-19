@@ -30,9 +30,6 @@ public class POToVOUtils {
 
     /**
      * GradePO转GradeVO
-     *
-     * @param gradePO
-     * @return
      */
     public static GradeVO gradePOToVO(GradePO gradePO) {
         GradeVO gradeVO = new GradeVO();

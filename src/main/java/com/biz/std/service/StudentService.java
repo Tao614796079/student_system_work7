@@ -27,4 +27,6 @@ public interface StudentService {
     boolean existsStudent(int id);
 
     List<SubjectVO> uncheckedSubject(int id);
+
+    int getTotalPage(int pageSize);
 }

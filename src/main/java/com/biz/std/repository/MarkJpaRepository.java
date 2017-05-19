@@ -13,5 +13,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MarkJpaRepository extends JpaRepository<MarkPO, Integer> {
     List<MarkPO> findAllByStudentPO(StudentPO studentPO);
+
     MarkPO findByStudentPOAndAndSubjectPO(StudentPO studentPO, SubjectPO subjectPO);
 }

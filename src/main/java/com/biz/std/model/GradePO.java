@@ -1,6 +1,7 @@
 package com.biz.std.model;
 
 import javax.persistence.*;
+
 /**
  * Created by Administrator on 2017/5/5.
  */

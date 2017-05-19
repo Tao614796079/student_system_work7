@@ -28,7 +28,8 @@
     <link rel="stylesheet" href="assets/css/fonts.googleapis.com.css"/>
 
     <!-- ace styles -->
-    <link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style"/>
+    <link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet"
+          id="main-ace-style"/>
 
     <!--[if lte IE 9]>
     <link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet"/>
@@ -44,7 +45,7 @@
 
     <!-- ace settings handler -->
     <script src="assets/js/ace-extra.min.js"></script>
-
+    <script src="js/form.js"></script>
     <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
 
     <!--[if lte IE 8]>
@@ -57,7 +58,7 @@
 <div id="navbar" class="navbar navbar-default          ace-save-state">
     <div class="navbar-container ace-save-state" id="navbar-container">
         <div class="navbar-header pull-left">
-            <a href="tables2.html" class="navbar-brand">
+            <a href="${pageContext.request.contextPath}/index.jsp" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
                     Student System
@@ -71,7 +72,7 @@
     <div id="sidebar" class="sidebar                  responsive                    ace-save-state">
         <ul class="nav nav-list">
             <li class="text-center">
-                <a href="${pageContext.request.contextPath}/studentMain">
+                <a href="${pageContext.request.contextPath}/index.jsp">
 							<span class="menu-text">
 								学生
 							</span>
@@ -110,12 +111,16 @@
                             <div class="col-xs-12">
                                 <div class="col-xs-12">
                                     <div class="col-xs-3 pull-right">
-                                        <form action="${pageContext.request.contextPath}/addSubject" method="post">
+                                        <form id="addSubject"
+                                              action="${pageContext.request.contextPath}/addSubject"
+                                              method="post">
                                             <div class="input-group">
-                                                <input type="text" class="form-control search-query" name="name"
+                                                <input type="text" class="form-control search-query"
+                                                       name="name" id="name"
                                                        placeholder="课程名称"/>
                                                 <span class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary pull-right" type="submit">
+                                            <button class="btn btn-sm btn-primary pull-right"
+                                                    type="button" onclick="addSubject()">
                                                 <i class="ace-icon glyphicon glyphicon-plus"></i>添加</button>
                                         </span>
                                             </div>
@@ -124,7 +129,8 @@
                                     <br>
                                     <div class="space-6"></div>
                                     <br>
-                                    <table id="simple-table" class="table  table-bordered table-hover">
+                                    <table id="simple-table"
+                                           class="table  table-bordered table-hover">
                                         <thead>
                                         <tr>
                                             <th>序号</th>
@@ -135,7 +141,8 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach items="${subjectVOList}" var="subjectVO" varStatus="status">
+                                        <c:forEach items="${subjectVOList}" var="subjectVO"
+                                                   varStatus="status">
                                             <tr>
                                                 <td>${status.index+1}</td>
                                                 <td>${subjectVO.name}</td>
@@ -143,8 +150,10 @@
                                                 <td class="hidden-480">${subjectVO.avgScore}</td>
                                                 <td>
                                                     <div class="hidden-sm hidden-xs btn-group">
-                                                        <button href="#modal-table" data-toggle="modal"
-                                                                data-name="${subjectVO.name}" data-id="${subjectVO.id}"
+                                                        <button href="#modal-table"
+                                                                data-toggle="modal"
+                                                                data-name="${subjectVO.name}"
+                                                                data-id="${subjectVO.id}"
                                                                 class="btn btn-xs btn-info btn-modal-updateSubject">
                                                             <i class="ace-icon fa fa-pencil bigger-120"></i>
                                                         </button>
@@ -214,7 +223,10 @@
 <script src="assets/js/jquery-1.11.3.min.js"></script>
 <![endif]-->
 <script type="text/javascript">
-    if ('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    if ('ontouchstart'
+        in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"
+        + "<"
+        + "/script>");
 </script>
 <script src="assets/js/bootstrap.min.js"></script>
 

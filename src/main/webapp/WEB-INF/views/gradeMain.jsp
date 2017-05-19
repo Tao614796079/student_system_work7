@@ -19,16 +19,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 
     <!-- bootstrap & fontawesome -->
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../assets/font-awesome/4.5.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css"/>
 
     <!-- page specific plugin styles -->
 
     <!-- text fonts -->
-    <link rel="stylesheet" href="../assets/css/fonts.googleapis.com.css"/>
+    <link rel="stylesheet" href="assets/css/fonts.googleapis.com.css"/>
 
     <!-- ace styles -->
-    <link rel="stylesheet" href="../assets/css/ace.min.css" class="ace-main-stylesheet"
+    <link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet"
           id="main-ace-style"/>
 
     <!--[if lte IE 9]>
@@ -42,7 +42,7 @@
     <![endif]-->
 
     <!-- inline styles related to this page -->
-
+    <script src="js/form.js"></script>
     <!-- ace settings handler -->
     <script src="assets/js/ace-extra.min.js"></script>
 
@@ -58,7 +58,7 @@
 <div id="navbar" class="navbar navbar-default          ace-save-state">
     <div class="navbar-container ace-save-state" id="navbar-container">
         <div class="navbar-header pull-left">
-            <a href="tables2.html" class="navbar-brand">
+            <a href="${pageContext.request.contextPath}/index.jsp" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
                     Student System
@@ -72,7 +72,7 @@
     <div id="sidebar" class="sidebar                  responsive                    ace-save-state">
         <ul class="nav nav-list">
             <li class="text-center">
-                <a href="${pageContext.request.contextPath}/studentMain">
+                <a href="${pageContext.request.contextPath}/index.jsp">
 							<span class="menu-text">
 								学生
 							</span>
@@ -107,13 +107,14 @@
                     <div class="col-xs-12">
                         <div class="col-xs-12">
                             <div class="col-xs-3 pull-right">
-                                <form action="/addGrade" method="post" id="addGrade">
+                                <form action="${pageContext.request.contextPath}/addGrade"
+                                      method="post" id="addGrade">
                                     <div class="input-group">
                                         <input type="text" class="form-control search-query"
-                                               name="name" placeholder="班级名称" minlength="2" maxlength="10" required/>
+                                               name="name" id="name" placeholder="班级名称"/>
                                         <span class="input-group-btn">
                                             <button class="btn btn-sm btn-primary pull-right"
-                                                    type="submit">
+                                                    type="button" onclick="addGrade()">
                                                 <i class="ace-icon glyphicon glyphicon-plus"></i>添加</button>
                                         </span>
                                     </div>
@@ -283,13 +284,13 @@
         $("#gradeName").val(gradeName);
     });
     $("#update-grade-name").click(function () {
-        var gradeId =$("#gradeId").val();
+        var gradeId = $("#gradeId").val();
         var gradeName = $("#gradeName").val();
         $.ajax({
             type: "POST",
             url: "updateGrade",
             traditional: true,
-            data: {"id": gradeId,"name":gradeName},
+            data: {"id": gradeId, "name": gradeName},
             dataType: "json",
             async: false,
             success: function (data) {

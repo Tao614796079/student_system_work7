@@ -15,13 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class SubjectController {
     @Autowired
     private SubjectService subjectService;
-    @Autowired
-    private StudentService studentService;
 
     @RequestMapping("/subjectMain")
     public String subjectMain(Model model) {
         model.addAttribute("subjectVOList", subjectService.getAllSubject());
-
         return "subjectMain";
     }
 

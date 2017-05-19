@@ -58,7 +58,7 @@
 <div id="navbar" class="navbar navbar-default          ace-save-state">
     <div class="navbar-container ace-save-state" id="navbar-container">
         <div class="navbar-header pull-left">
-            <a href="tables2.html" class="navbar-brand">
+            <a href="${pageContext.request.contextPath}/index.jsp" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
                     Student System
@@ -72,7 +72,7 @@
     <div id="sidebar" class="sidebar                  responsive                    ace-save-state">
         <ul class="nav nav-list">
             <li class="text-center">
-                <a href="${pageContext.request.contextPath}/studentMain">
+                <a href="${pageContext.request.contextPath}/index.jsp">
 							<span class="menu-text">
 								学生
 							</span>
@@ -206,19 +206,13 @@
         console.log(subjects);
         console.log(scores);
         $.ajax({
-            type: "POST",
-            url: "addSubjectAndScoreToStudent",
-            traditional: true,
-            data: {
+            type: "POST", url: "addSubjectAndScoreToStudent", traditional: true, data: {
                 "subjects": JSON.stringify(subjects),
                 "studentId": studentId,
                 "scores": JSON.stringify(scores)
-            },
-            dataType: "json",
-            async: false,
-            success: function (data) {
+            }, dataType: "json", async: false, success: function (data) {
                 if (data) {
-                    window.location.href="/index.jsp";
+                    window.location.href = "${pageContext.request.contextPath}/index.jsp";
                 }
             }
         });

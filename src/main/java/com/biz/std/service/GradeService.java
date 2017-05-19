@@ -11,8 +11,12 @@ import java.util.List;
  */
 public interface GradeService {
     void saveGrade(String name);
+
     List<GradeVO> getAllGrade();
+
     GradeVO getGrade(int id);
+
     void deleteGrade(int id);
+
     void updateName(int id, String name);
 }
